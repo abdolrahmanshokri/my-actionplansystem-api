@@ -55,12 +55,22 @@ public class SettingsController : ControllerBase
     {
         var keys = new[]
         {
-            "app_title", "app_slogan", "browser_title", "system_name",
-            "header_logo", "browser_favicon", "sso_enabled", "ad_enabled"
+            "app_title", 
+            "app_slogan", 
+            "browser_title", 
+            "system_name",
+            "header_logo", 
+            "browser_favicon", 
+            "sso_enabled", 
+            "ad_enabled",
+            "custom_font",         // فونت سفارشی اضافه شد
+            "custom_font_name"     // نام فونت سفارشی اضافه شد
         };
+        
         var rows = await _db.AppSettings
             .Where(s => keys.Contains(s.Key))
             .ToListAsync();
+            
         return Ok(rows.ToDictionary(s => s.Key, s => s.Value));
     }
 }
